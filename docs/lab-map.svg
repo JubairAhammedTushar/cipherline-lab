@@ -1,0 +1,50 @@
+<svg viewBox="0 0 360 470" role="img" aria-labelledby="labmapTitle labmapDesc" xmlns="http://www.w3.org/2000/svg">
+      <title id="labmapTitle">How the JAT Cipherline 2300 lab fits together</title>
+      <desc id="labmapDesc">Family devices reach the VPN through the home router in Bangladesh. My own phone and laptop in Cardiff manage the lab over Tailscale. One Proxmox mini PC runs the VPN gateway, the services VM, Kali Linux, the Wazuh SOC and Splunk. The router mails its log to the SOC over TLS; the SOC sends alerts and events to Splunk; Wazuh agents on the host and VMs report to the SOC.</desc>
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7cbcff"/></marker>
+        <marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8e3d4"/></marker>
+      </defs>
+      <g font-family="IBM Plex Sans, system-ui, sans-serif" fill="#cfe3ef">
+        <rect x="8" y="8" width="160" height="46" rx="9" fill="#142734" stroke="#416075"/>
+        <text x="88" y="28" text-anchor="middle" font-size="13" font-weight="600">Family devices</text>
+        <text x="88" y="44" text-anchor="middle" font-size="10.5" fill="#9fb6c6">UK and abroad</text>
+        <rect x="192" y="8" width="160" height="46" rx="9" fill="#142734" stroke="#416075"/>
+        <text x="272" y="28" text-anchor="middle" font-size="13" font-weight="600">My phone &amp; laptop</text>
+        <text x="272" y="44" text-anchor="middle" font-size="10.5" fill="#9fb6c6">Cardiff</text>
+        <rect x="8" y="96" width="210" height="40" rx="9" fill="#142734" stroke="#416075"/>
+        <text x="113" y="121" text-anchor="middle" font-size="13" font-weight="600">Home router · Bangladesh</text>
+        <line x1="88" y1="54" x2="88" y2="94" stroke="#7cbcff" stroke-width="1.6" marker-end="url(#ah)"/>
+        <text x="96" y="79" font-size="10.5" fill="#9fb6c6">VPN</text>
+        <line x1="312" y1="54" x2="312" y2="174" stroke="#a8e3d4" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#aht)"/>
+        <text x="304" y="104" text-anchor="end" font-size="10.5" fill="#a8e3d4">Tailscale</text>
+        <text x="304" y="118" text-anchor="end" font-size="10.5" fill="#a8e3d4">(admin only)</text>
+        <rect x="8" y="176" width="344" height="286" rx="14" fill="rgba(20,39,52,.35)" stroke="#2e4557" stroke-dasharray="6 4"/>
+        <line x1="88" y1="136" x2="88" y2="210" stroke="#7cbcff" stroke-width="1.6" marker-end="url(#ah)"/>
+        <text x="96" y="160" font-size="10.5" fill="#9fb6c6">port forwards</text>
+        <line x1="190" y1="136" x2="248" y2="210" stroke="#7cbcff" stroke-width="1.6" marker-end="url(#ah)"/>
+        <text x="226" y="160" font-size="10.5" fill="#9fb6c6">Mail Log (TLS)</text>
+        <rect x="20" y="212" width="150" height="56" rx="9" fill="#142734" stroke="#416075"/>
+        <text x="95" y="236" text-anchor="middle" font-size="13" font-weight="600">VPN gateway</text>
+        <text x="95" y="253" text-anchor="middle" font-size="10.5" fill="#9fb6c6">VPN · master console</text>
+        <rect x="190" y="212" width="150" height="56" rx="9" fill="#17303f" stroke="#8abdd8"/>
+        <text x="265" y="236" text-anchor="middle" font-size="13" font-weight="600">SOC</text>
+        <text x="265" y="253" text-anchor="middle" font-size="10.5" fill="#9fb6c6">Wazuh · my rules</text>
+        <line x1="265" y1="268" x2="265" y2="290" stroke="#7cbcff" stroke-width="1.6" marker-end="url(#ah)"/>
+        <text x="272" y="284" font-size="10" fill="#9fb6c6">alerts, events</text>
+        <rect x="20" y="292" width="150" height="56" rx="9" fill="#142734" stroke="#416075"/>
+        <text x="95" y="314" text-anchor="middle" font-size="13" font-weight="600">Services</text>
+        <text x="95" y="329" text-anchor="middle" font-size="10.5" fill="#9fb6c6">Nextcloud · Vaultwarden</text>
+        <text x="95" y="342" text-anchor="middle" font-size="10.5" fill="#9fb6c6">Pi-hole · Traefik</text>
+        <rect x="190" y="292" width="150" height="56" rx="9" fill="#142734" stroke="#416075"/>
+        <text x="265" y="316" text-anchor="middle" font-size="13" font-weight="600">Splunk</text>
+        <text x="265" y="333" text-anchor="middle" font-size="10.5" fill="#9fb6c6">started on demand</text>
+        <rect x="20" y="372" width="150" height="56" rx="9" fill="#142734" stroke="#416075"/>
+        <text x="95" y="396" text-anchor="middle" font-size="13" font-weight="600">Kali Linux</text>
+        <text x="95" y="413" text-anchor="middle" font-size="10.5" fill="#9fb6c6">Wi-Fi card passed through</text>
+        <text x="200" y="390" font-size="10.5" fill="#9fb6c6">Wazuh agents on the host</text>
+        <text x="200" y="405" font-size="10.5" fill="#9fb6c6">and every VM report</text>
+        <text x="200" y="420" font-size="10.5" fill="#9fb6c6">to the SOC.</text>
+        <text x="20" y="452" font-size="10.5" font-weight="600" fill="#8ccaf0" letter-spacing=".06em">PROXMOX VE · ONE HP MINI PC</text>
+      </g>
+    </svg>

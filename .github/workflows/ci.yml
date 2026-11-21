@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Detection receiver tests (36 checks)
+        run: python3 detections/router-mail/test-router-mail.py
+      - name: Idle-watch reference tests
+        run: python3 test_idle_watch.py
+        working-directory: examples/idle-watch
+      - name: Secrets-on-stdin reference tests
+        run: python3 test_secrets_on_stdin.py
+        working-directory: examples/secrets-on-stdin
+      - name: Forced-command reference tests
+        run: bash examples/ssh-forced-command/test-forced-command.sh

@@ -1,0 +1,63 @@
+# Hardened systemd service unit (reference implementation)
+# --------------------------------------------------------
+# A long-running lab service, confined with the kernel sandboxing systemd exposes so a
+# bug or a compromise has as little reach as possible. Check any unit's score with:
+#
+#   systemd-analyze security lab-service.service
+#
+# Values here are illustrative; tighten each one to what the service actually needs and
+# re-run the analyzer.
+
+[Unit]
+Description=Example hardened lab service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/lib/lab-service/run
+Restart=on-failure
+RestartSec=2
+
+# --- Identity: no privilege, its own unprivileged user ---
+User=lab-service
+Group=lab-service
+DynamicUser=yes
+NoNewPrivileges=yes
+
+# --- Filesystem: read-only system, a private /tmp, one writable state dir ---
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+StateDirectory=lab-service
+ReadWritePaths=/var/lib/lab-service
+
+# --- Kernel and devices: hands off ---
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+PrivateDevices=yes
+DevicePolicy=closed
+
+# --- Network: local sockets only (drop AF_INET/AF_INET6 lines if it needs the network) ---
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+IPAddressDeny=any
+IPAddressAllow=localhost
+
+# --- System calls: a modern allow-list, no raw memory tricks or privilege escalation ---
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged ~@resources
+SystemCallArchitectures=native
+MemoryDenyWriteExecute=yes
+LockPersonality=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+RemoveIPC=yes
+UMask=0077
+CapabilityBoundingSet=
+
+[Install]
+WantedBy=multi-user.target
